@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, Heart, ShoppingCart } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 const FeaturedProducts = () => {
   const featuredProducts = [
@@ -109,11 +109,11 @@ const FeaturedProducts = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
-            Featured Products
+            Our Product Portfolio
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our most popular and newest arrivals. Each piece is carefully selected 
-            for quality, style, and exceptional value.
+            Explore our curated collection of home decor and furniture pieces, 
+            crafted for quality and timeless design.
           </p>
         </div>
 
@@ -137,22 +137,7 @@ const FeaturedProducts = () => {
                     </Badge>
                   </div>
 
-                  {/* Quick Actions */}
-                  <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Button size="sm" variant="secondary" className="w-10 h-10 p-0">
-                      <Heart className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="secondary" className="w-10 h-10 p-0">
-                      <ShoppingCart className="h-4 w-4" />
-                    </Button>
-                  </div>
 
-                  {/* Stock Status */}
-                  {!product.inStock && (
-                    <div className="absolute inset-0 bg-primary/80 flex items-center justify-center">
-                      <span className="text-primary-foreground font-semibold text-lg">Out of Stock</span>
-                    </div>
-                  )}
                 </div>
 
                 {/* Product Info */}
@@ -174,27 +159,9 @@ const FeaturedProducts = () => {
                     {product.description}
                   </p>
 
-                  {/* Pricing */}
-                  <div className="flex items-center space-x-2 mb-4">
-                    <span className="text-lg font-bold text-primary">{product.price}</span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through">
-                        {product.originalPrice}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex space-x-2">
-                    <Button 
-                      className="flex-1" 
-                      disabled={!product.inStock}
-                    >
-                      {product.inStock ? 'Add to Cart' : 'Notify When Available'}
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Details
-                    </Button>
+                  {/* Product Details */}
+                  <div className="text-sm text-muted-foreground">
+                    Available in our collection
                   </div>
                 </div>
               </CardContent>
@@ -202,10 +169,10 @@ const FeaturedProducts = () => {
           ))}
         </div>
 
-        {/* View All CTA */}
+        {/* Contact CTA */}
         <div className="text-center mt-12">
           <Button size="lg" variant="outline" className="px-8">
-            View All Products
+            Contact Us for Details
           </Button>
         </div>
       </div>

@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { Menu, X, Search, User, ShoppingBag } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigationItems = [
     { name: 'Home', href: '#' },
-    { name: 'Shop', href: '#shop' },
-    { name: 'Catalogs', href: '#catalogs' },
-    { name: 'Showrooms', href: '#showrooms' },
+    { name: 'Portfolio', href: '#portfolio' },
     { name: 'Our Story', href: '#story' },
     { name: 'Contact', href: '#contact' }
   ];
@@ -51,53 +49,19 @@ const Header = () => {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Search Bar - Desktop */}
-            <div className="hidden lg:flex items-center space-x-2">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search the site"
-                  className="pl-10 w-64 bg-muted/50"
-                />
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" className="hidden sm:flex">
-                <User className="h-4 w-4 mr-2" />
-                Login
-              </Button>
-              <Button variant="ghost" size="sm">
-                <ShoppingBag className="h-4 w-4" />
-              </Button>
-              
-              {/* Mobile Menu Button */}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="md:hidden"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </Button>
-            </div>
+          <div className="flex items-center">
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
           </div>
         </div>
 
-        {/* Mobile Search */}
-        <div className="lg:hidden pb-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search the site"
-              className="pl-10 w-full bg-muted/50"
-            />
-          </div>
-        </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
@@ -113,15 +77,6 @@ const Header = () => {
                   {item.name}
                 </a>
               ))}
-              <div className="pt-2 border-t border-border">
-                <a
-                  href="#"
-                  className="block py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
-                >
-                  <User className="h-4 w-4 inline mr-2" />
-                  Login / Register
-                </a>
-              </div>
             </nav>
           </div>
         )}
