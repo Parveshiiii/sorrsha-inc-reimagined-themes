@@ -1,107 +1,223 @@
+import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Star, Heart, ShoppingCart } from 'lucide-react';
 
 const FeaturedProducts = () => {
-  const featuredProducts = [
-    {
-      id: 1,
-      name: 'Rustic Wood Console Table',
-      category: 'Furniture',
-      price: '$349.99',
-      originalPrice: '$429.99',
-      rating: 4.8,
-      reviews: 124,
-      image: '/api/placeholder/400/300',
-      badge: 'Best Seller',
-      badgeColor: 'success',
-      inStock: true,
-      description: 'Handcrafted console table with natural wood finish and industrial metal accents.'
-    },
-    {
-      id: 2,
-      name: 'Crystal Chandelier - 6 Light',
-      category: 'Lighting',
-      price: '$899.99',
-      originalPrice: null,
-      rating: 4.9,
-      reviews: 89,
-      image: '/api/placeholder/400/300',
-      badge: 'New Arrival',
-      badgeColor: 'primary',
-      inStock: true,
-      description: 'Elegant crystal chandelier with antique brass finish, perfect for dining rooms.'
-    },
-    {
-      id: 3,
-      name: 'Autumn Harvest Wreath',
-      category: 'Seasonal',
-      price: '$78.99',
-      originalPrice: '$95.99',
-      rating: 4.7,
-      reviews: 203,
-      image: '/api/placeholder/400/300',
-      badge: 'Sale',
-      badgeColor: 'destructive',
-      inStock: true,
-      description: 'Beautiful autumn wreath with natural elements and warm seasonal colors.'
-    },
-    {
-      id: 4,
-      name: 'Luxury Throw Pillow Set',
-      category: 'Textiles',
-      price: '$129.99',
-      originalPrice: null,
-      rating: 4.6,
-      reviews: 156,
-      image: '/api/placeholder/400/300',
-      badge: 'Customer Favorite',
-      badgeColor: 'tertiary',
-      inStock: false,
-      description: 'Set of 3 premium throw pillows in coordinating neutral tones with different textures.'
-    },
-    {
-      id: 5,
-      name: 'Vintage Mirror Collection',
-      category: 'Wall Art',
-      price: '$245.99',
-      originalPrice: '$299.99',
-      rating: 4.8,
-      reviews: 78,
-      image: '/api/placeholder/400/300',
-      badge: 'Limited Edition',
-      badgeColor: 'warning',
-      inStock: true,
-      description: 'Set of 3 vintage-inspired mirrors in different sizes with ornate frames.'
-    },
-    {
-      id: 6,
-      name: 'Farmhouse Table Lamp',
-      category: 'Lighting',
-      price: '$159.99',
-      originalPrice: null,
-      rating: 4.5,
-      reviews: 134,
-      image: '/api/placeholder/400/300',
-      badge: 'Staff Pick',
-      badgeColor: 'accent',
-      inStock: true,
-      description: 'Charming farmhouse-style table lamp with linen shade and distressed wood base.'
-    }
+  const products = {
+    giftables: [
+      {
+        id: 1,
+        name: 'Antique Brass Picture Frame',
+        category: 'Giftables',
+        image: '/api/placeholder/400/300',
+        description: 'Elegant brass frame with vintage patina finish.'
+      },
+      {
+        id: 2,
+        name: 'Ceramic Vase Collection',
+        category: 'Giftables',
+        image: '/api/placeholder/400/300',
+        description: 'Set of three ceramic vases in neutral tones.'
+      },
+      {
+        id: 3,
+        name: 'Wooden Jewelry Box',
+        category: 'Giftables',
+        image: '/api/placeholder/400/300',
+        description: 'Handcrafted wooden jewelry box with velvet interior.'
+      },
+      {
+        id: 4,
+        name: 'Glass Candle Holders',
+        category: 'Giftables',
+        image: '/api/placeholder/400/300',
+        description: 'Set of mercury glass candle holders.'
+      }
+    ],
+    furniture: [
+      {
+        id: 5,
+        name: 'Reclaimed Wood Console Table',
+        category: 'Furniture',
+        image: '/api/placeholder/400/300',
+        description: 'Console table made from reclaimed barn wood.'
+      },
+      {
+        id: 6,
+        name: 'Upholstered Dining Chair',
+        category: 'Furniture',
+        image: '/api/placeholder/400/300',
+        description: 'Linen upholstered chair with wooden legs.'
+      },
+      {
+        id: 7,
+        name: 'Rustic Coffee Table',
+        category: 'Furniture',
+        image: '/api/placeholder/400/300',
+        description: 'Round coffee table with metal base.'
+      },
+      {
+        id: 8,
+        name: 'Wooden Sideboard',
+        category: 'Furniture',
+        image: '/api/placeholder/400/300',
+        description: 'Mid-century modern sideboard with brass handles.'
+      }
+    ],
+    lighting: [
+      {
+        id: 9,
+        name: 'Industrial Pendant Light',
+        category: 'Lighting',
+        image: '/api/placeholder/400/300',
+        description: 'Black metal pendant with Edison bulb.'
+      },
+      {
+        id: 10,
+        name: 'Crystal Chandelier',
+        category: 'Lighting',
+        image: '/api/placeholder/400/300',
+        description: 'Six-light crystal chandelier with brass frame.'
+      },
+      {
+        id: 11,
+        name: 'Table Lamp with Linen Shade',
+        category: 'Lighting',
+        image: '/api/placeholder/400/300',
+        description: 'Ceramic base with natural linen shade.'
+      },
+      {
+        id: 12,
+        name: 'Wall Sconce Set',
+        category: 'Lighting',
+        image: '/api/placeholder/400/300',
+        description: 'Pair of brass wall sconces with glass shades.'
+      }
+    ],
+    textiles: [
+      {
+        id: 13,
+        name: 'Throw Pillow Collection',
+        category: 'Textiles',
+        image: '/api/placeholder/400/300',
+        description: 'Set of coordinating throw pillows in neutral tones.'
+      },
+      {
+        id: 14,
+        name: 'Wool Area Rug',
+        category: 'Textiles',
+        image: '/api/placeholder/400/300',
+        description: 'Hand-woven wool rug in geometric pattern.'
+      },
+      {
+        id: 15,
+        name: 'Cotton Throw Blanket',
+        category: 'Textiles',
+        image: '/api/placeholder/400/300',
+        description: 'Soft cotton throw with fringe detail.'
+      },
+      {
+        id: 16,
+        name: 'Linen Curtain Panels',
+        category: 'Textiles',
+        image: '/api/placeholder/400/300',
+        description: 'Natural linen curtains with grommets.'
+      }
+    ],
+    floral: [
+      {
+        id: 17,
+        name: 'Autumn Harvest Wreath',
+        category: 'Floral & Greenery',
+        image: '/api/placeholder/400/300',
+        description: 'Seasonal wreath with dried flowers and berries.'
+      },
+      {
+        id: 18,
+        name: 'Eucalyptus Garland',
+        category: 'Floral & Greenery',
+        image: '/api/placeholder/400/300',
+        description: '6-foot eucalyptus garland for mantels.'
+      },
+      {
+        id: 19,
+        name: 'Potted Succulent Garden',
+        category: 'Floral & Greenery',
+        image: '/api/placeholder/400/300',
+        description: 'Arrangement of succulents in ceramic pot.'
+      },
+      {
+        id: 20,
+        name: 'Faux Olive Branch',
+        category: 'Floral & Greenery',
+        image: '/api/placeholder/400/300',
+        description: 'Realistic olive branches for vases.'
+      }
+    ],
+    wallArt: [
+      {
+        id: 21,
+        name: 'Vintage Mirror Set',
+        category: 'Mirrors & Wall Art',
+        image: '/api/placeholder/400/300',
+        description: 'Collection of three vintage-style mirrors.'
+      },
+      {
+        id: 22,
+        name: 'Abstract Canvas Print',
+        category: 'Mirrors & Wall Art',
+        image: '/api/placeholder/400/300',
+        description: 'Modern abstract artwork in neutral colors.'
+      },
+      {
+        id: 23,
+        name: 'Wooden Wall Clock',
+        category: 'Mirrors & Wall Art',
+        image: '/api/placeholder/400/300',
+        description: 'Rustic wooden clock with Roman numerals.'
+      },
+      {
+        id: 24,
+        name: 'Metal Wall Sculpture',
+        category: 'Mirrors & Wall Art',
+        image: '/api/placeholder/400/300',
+        description: 'Contemporary metal wall art piece.'
+      }
+    ]
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  
+  const allProducts = [
+    ...products.giftables,
+    ...products.furniture,
+    ...products.lighting,
+    ...products.textiles,
+    ...products.floral,
+    ...products.wallArt
   ];
 
-  const getBadgeVariant = (color: string) => {
-    switch (color) {
-      case 'success': return 'default';
-      case 'primary': return 'secondary';
-      case 'destructive': return 'destructive';
-      case 'warning': return 'outline';
-      case 'tertiary': return 'secondary';
-      case 'accent': return 'outline';
-      default: return 'default';
-    }
-  };
+  const filteredProducts = selectedCategory === 'all' 
+    ? allProducts 
+    : allProducts.filter(product => {
+        if (selectedCategory === 'giftables') return products.giftables.includes(product);
+        if (selectedCategory === 'furniture') return products.furniture.includes(product);
+        if (selectedCategory === 'lighting') return products.lighting.includes(product);
+        if (selectedCategory === 'textiles') return products.textiles.includes(product);
+        if (selectedCategory === 'floral') return products.floral.includes(product);
+        if (selectedCategory === 'wallArt') return products.wallArt.includes(product);
+        return false;
+      });
+
+  const categories = [
+    { id: 'all', name: 'All Products', count: allProducts.length },
+    { id: 'giftables', name: 'Giftables', count: products.giftables.length },
+    { id: 'furniture', name: 'Furniture', count: products.furniture.length },
+    { id: 'lighting', name: 'Lighting', count: products.lighting.length },
+    { id: 'textiles', name: 'Textiles', count: products.textiles.length },
+    { id: 'floral', name: 'Floral & Greenery', count: products.floral.length },
+    { id: 'wallArt', name: 'Mirrors & Wall Art', count: products.wallArt.length }
+  ];
 
   return (
     <section className="py-20 bg-background">
@@ -109,105 +225,68 @@ const FeaturedProducts = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
-            Featured Products
+            Our Products
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our most popular and newest arrivals. Each piece is carefully selected 
-            for quality, style, and exceptional value.
+            Browse our curated collection of home decor, furniture, and accessories. 
+            Each piece is carefully selected for quality and style.
           </p>
         </div>
 
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {categories.map((category) => (
+            <Button
+              key={category.id}
+              variant={selectedCategory === category.id ? "default" : "outline"}
+              onClick={() => setSelectedCategory(category.id)}
+              className="transition-all"
+            >
+              {category.name} ({category.count})
+            </Button>
+          ))}
+        </div>
+
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map((product) => (
-            <Card key={product.id} className="product-card group overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredProducts.map((product) => (
+            <Card key={product.id} className="product-card group overflow-hidden hover:shadow-lg transition-shadow">
               <CardContent className="p-0">
                 {/* Product Image */}
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-square overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  
-                  {/* Badge */}
-                  <div className="absolute top-4 left-4">
-                    <Badge variant={getBadgeVariant(product.badgeColor)} className="font-semibold">
-                      {product.badge}
-                    </Badge>
-                  </div>
-
-                  {/* Quick Actions */}
-                  <div className="absolute top-4 right-4 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Button size="sm" variant="secondary" className="w-10 h-10 p-0">
-                      <Heart className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="secondary" className="w-10 h-10 p-0">
-                      <ShoppingCart className="h-4 w-4" />
-                    </Button>
-                  </div>
-
-                  {/* Stock Status */}
-                  {!product.inStock && (
-                    <div className="absolute inset-0 bg-primary/80 flex items-center justify-center">
-                      <span className="text-primary-foreground font-semibold text-lg">Out of Stock</span>
-                    </div>
-                  )}
                 </div>
 
                 {/* Product Info */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-muted-foreground font-medium">{product.category}</span>
-                    <div className="flex items-center space-x-1">
-                      <Star className="h-4 w-4 fill-warning text-warning" />
-                      <span className="text-sm font-medium">{product.rating}</span>
-                      <span className="text-sm text-muted-foreground">({product.reviews})</span>
-                    </div>
+                <div className="p-4">
+                  <div className="mb-2">
+                    <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                      {product.category}
+                    </span>
                   </div>
 
-                  <h3 className="font-serif font-bold text-primary mb-2 line-clamp-2">
+                  <h3 className="font-serif font-semibold text-foreground mb-2 line-clamp-2">
                     {product.name}
                   </h3>
 
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                  <p className="text-sm text-muted-foreground line-clamp-2">
                     {product.description}
                   </p>
-
-                  {/* Pricing */}
-                  <div className="flex items-center space-x-2 mb-4">
-                    <span className="text-lg font-bold text-primary">{product.price}</span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through">
-                        {product.originalPrice}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex space-x-2">
-                    <Button 
-                      className="flex-1" 
-                      disabled={!product.inStock}
-                    >
-                      {product.inStock ? 'Add to Cart' : 'Notify When Available'}
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Details
-                    </Button>
-                  </div>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* View All CTA */}
-        <div className="text-center mt-12">
-          <Button size="lg" variant="outline" className="px-8">
-            View All Products
-          </Button>
-        </div>
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No products found in this category.</p>
+          </div>
+        )}
       </div>
     </section>
   );
